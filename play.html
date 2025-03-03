@@ -6,11 +6,13 @@
     <title>Solana Acres - Play</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
@@ -49,7 +51,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
             z-index: 2;
         }
 
@@ -59,62 +61,128 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 2rem;
-            border-radius: 10px;
+            background: rgba(20, 20, 30, 0.85);
+            padding: 2.5rem;
+            border-radius: 16px;
             width: 90%;
             max-width: 500px;
             text-align: center;
-            border: 2px solid #FFD700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
         }
 
         .signup-container h1 {
             color: #FFD700;
             margin-bottom: 1.5rem;
             font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .signup-container p {
             color: #fff;
             margin-bottom: 2rem;
             font-size: 1rem;
-            line-height: 1.4;
+            line-height: 1.6;
+            opacity: 0.9;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .wallet-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .wallet-icon {
+            position: absolute;
+            left: 16px;
+            color: #FFD700;
+            font-size: 1.2rem;
         }
 
         .form-group input {
             width: 100%;
-            padding: 0.8rem;
-            border-radius: 5px;
-            border: 1px solid #FFD700;
-            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem 1rem 1rem 3rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            background-color: rgba(10, 10, 20, 0.7);
             color: #fff;
             font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
         }
 
         .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .solana-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .solana-logo {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
 
         .signup-btn {
-            background-color: #FFD700;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #000;
             border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
+            padding: 1rem 2rem;
+            border-radius: 12px;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+            width: 90%;
+            max-width: 300px;
+            position: relative;
+            overflow: hidden;
         }
 
         .signup-btn:hover {
-            background-color: #FFC000;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
+        }
+
+        .signup-btn:active {
+            transform: translateY(1px);
+        }
+
+        .signup-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .signup-btn:hover::before {
+            left: 100%;
         }
 
         .modal {
@@ -128,52 +196,69 @@
             z-index: 10;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background-color: #000;
-            padding: 2rem;
-            border-radius: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 2.5rem;
+            border-radius: 16px;
             max-width: 500px;
             width: 90%;
             text-align: center;
-            border: 2px solid #FFD700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
             position: relative;
+            animation: modalOpen 0.5s ease-out forwards;
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .modal h2 {
             color: #FFD700;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-size: 1.8rem;
+            font-weight: 700;
         }
 
         .modal p {
             color: #fff;
             margin-bottom: 1.5rem;
-            font-size: 1rem;
-            line-height: 1.4;
+            font-size: 1.1rem;
+            line-height: 1.5;
         }
 
         .highlight {
             color: #FFD700;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .close-btn {
-            background-color: #FFD700;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #000;
             border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+            margin-top: 1rem;
         }
 
         .close-btn:hover {
-            background-color: #FFC000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
         }
 
         .logo {
@@ -184,24 +269,56 @@
             height: 60px;
         }
 
+        .wheat-token {
+            display: inline-block;
+            font-weight: bold;
+            background: -webkit-linear-gradient(#FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .benefits-list {
+            text-align: left;
+            max-width: 80%;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .benefits-list li {
+            color: #fff;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+            opacity: 0.9;
+        }
+
+        .benefits-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+        }
+
         @media (max-width: 768px) {
             .signup-container {
-                padding: 1.5rem;
+                padding: 1.8rem;
             }
 
             .signup-container h1 {
                 font-size: 1.6rem;
+            }
+
+            .benefits-list {
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <!-- Logo -->
-    <img src="images/logo.png" alt="Solana Acres Logo" class="logo">
+    <img src="images/long_logo.png" alt="Solana Acres Logo" class="logo">
 
     <!-- Video Background -->
     <div class="video-container">
-        <!-- Replace the src with your actual Cloudinary video URL -->
         <video autoplay loop muted playsinline>
             <source src="https://res.cloudinary.com/dk4bbapud/video/upload/v1740980992/yrlzob30hujvwx8gu1pa.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -214,19 +331,44 @@
     <!-- Signup Container -->
     <div class="signup-container">
         <h1>Join Solana Acres Early Access</h1>
-        <p>Be among the first farmers to cultivate your fortune in the premier Web3 farming universe on Solana!</p>
+        <p>Be among the first pioneers in our growing ecosystem with exclusive early token access.</p>
+        
+        <ul class="benefits-list">
+            <li>Access to $WHEAT token pre-launch</li>
+            <li>Exclusive starter farm plots</li>
+            <li>Special founding member benefits</li>
+        </ul>
+        
         <div class="form-group">
-            <input type="text" id="solana-address" placeholder="Enter your Solana wallet address">
+            <div class="solana-label">
+                <svg class="solana-logo" viewBox="0 0 397.7 311.7" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px">
+                    <linearGradient id="solanaGradient" gradientUnits="userSpaceOnUse" x1="64.01" y1="302.81" x2="339.94" y2="26.87">
+                        <stop offset="0" stop-color="#00FFA3"/>
+                        <stop offset="1" stop-color="#DC1FFF"/>
+                    </linearGradient>
+                    <path fill="url(#solanaGradient)" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zm0-139.6c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zm317.5-61.6c-2.4-2.4-5.7-3.8-9.2-3.8H55.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
+                </svg>
+                Enter your Solana wallet address
+            </div>
+            
+            <div class="wallet-input-container">
+                <svg class="wallet-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: 16px;">
+                    <path d="M19 8V6C19 4.89543 18.1046 4 17 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H17C18.1046 20 19 19.1046 19 18V16M19 8H21C21.5523 8 22 8.44772 22 9V15C22 15.5523 21.5523 16 21 16H19M19 8V16" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="16" cy="12" r="1" fill="#FFD700"/>
+                </svg>
+                <input type="text" id="solana-address" placeholder="solana..." autocomplete="off" spellcheck="false">
+            </div>
         </div>
-        <button class="signup-btn" onclick="showThankYouModal()">Join Now</button>
+        <button class="signup-btn" onclick="showThankYouModal()">Join Early Access</button>
     </div>
 
     <!-- Thank You Modal -->
     <div class="modal" id="thank-you-modal">
         <div class="modal-content">
-            <h2>Thanks for joining us at Solana Acres!</h2>
+            <h2>Thanks for joining Solana Acres!</h2>
+            <p>We are excited to have you as one of our founding farmers.</p>
             <p>We are now live on <span class="highlight">pump.fun</span></p>
-            <p>Enjoy early access to <span class="highlight">$WHEAT</span> and start your farming journey today!</p>
+            <p>Enjoy early access to <span class="wheat-token">$WHEAT</span> and start your farming journey today!</p>
             <button class="close-btn" onclick="closeModal()">Start Farming</button>
         </div>
     </div>
