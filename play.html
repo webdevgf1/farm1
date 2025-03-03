@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Acres - Play</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            background-color: #000;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .signup-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .signup-container h1 {
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .signup-container p {
+            color: #fff;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid #FFD700;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .signup-btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .signup-btn:hover {
+            background-color: #FFC000;
+            transform: translateY(-2px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 10;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #000;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            position: relative;
+        }
+
+        .modal h2 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .modal p {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .highlight {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .close-btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #FFC000;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 5;
+            height: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .signup-container {
+                padding: 1.5rem;
+            }
+
+            .signup-container h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <img src="images/logo.png" alt="Solana Acres Logo" class="logo">
+
+    <!-- Video Background -->
+    <div class="video-container">
+        <!-- Replace the src with your actual Cloudinary video URL -->
+        <video autoplay loop muted playsinline>
+            <source src="https://res.cloudinary.com/dk4bbapud/video/upload/v1740980992/yrlzob30hujvwx8gu1pa.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Signup Container -->
+    <div class="signup-container">
+        <h1>Join Solana Acres Early Access</h1>
+        <p>Be among the first farmers to cultivate your fortune in the premier Web3 farming universe on Solana!</p>
+        <div class="form-group">
+            <input type="text" id="solana-address" placeholder="Enter your Solana wallet address">
+        </div>
+        <button class="signup-btn" onclick="showThankYouModal()">Join Now</button>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div class="modal" id="thank-you-modal">
+        <div class="modal-content">
+            <h2>Thanks for joining us at Solana Acres!</h2>
+            <p>We are now live on <span class="highlight">pump.fun</span></p>
+            <p>Enjoy early access to <span class="highlight">$WHEAT</span> and start your farming journey today!</p>
+            <button class="close-btn" onclick="closeModal()">Start Farming</button>
+        </div>
+    </div>
+
+    <script>
+        function showThankYouModal() {
+            const address = document.getElementById('solana-address').value;
+            if (address.trim() === '') {
+                alert('Please enter your Solana wallet address');
+                return;
+            }
+            
+            // You would typically send this address to your backend here
+            console.log('Solana address submitted:', address);
+            
+            // Show thank you modal
+            document.getElementById('thank-you-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('thank-you-modal').style.display = 'none';
+            // Redirect to pump.fun or wherever you want users to go
+            // window.location.href = 'https://pump.fun';
+        }
+
+        // Ensure video works on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.querySelector('video');
+            video.play().catch(function(error) {
+                console.log('Auto-play was prevented:', error);
+                // Create a play button if autoplay is blocked
+                const playButton = document.createElement('button');
+                playButton.innerHTML = 'Play Video';
+                playButton.style.position = 'absolute';
+                playButton.style.zIndex = '4';
+                playButton.style.top = '50%';
+                playButton.style.left = '50%';
+                playButton.style.transform = 'translate(-50%, -50%)';
+                playButton.style.padding = '10px 20px';
+                playButton.style.backgroundColor = '#FFD700';
+                playButton.style.border = 'none';
+                playButton.style.borderRadius = '5px';
+                playButton.style.cursor = 'pointer';
+                playButton.addEventListener('click', function() {
+                    video.play();
+                    this.remove();
+                });
+                document.body.appendChild(playButton);
+            });
+        });
+    </script>
+</body>
+</html>
