@@ -1,425 +1,580 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/67c5e5f301230a7371ca6337_90692a50d92e98e6044ee6becf812d02%20(3).png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solana Acres - Play</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/67c5e5f301230a7371ca6337_90692a50d92e98e6044ee6becf812d02%20(3).png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Solana Acres - Where Farming Meets Finance: Solana's Revolutionary Crypto Harvest. Farm, trade, and craft NFTs in a play-to-own game.">
+  <title>Solana Acres - Where Farming Meets Finance: Solana's Revolutionary Crypto Harvest</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+  
+  
 
-        body {
-            overflow: hidden;
-            position: relative;
-            height: 100vh;
-            width: 100vw;
-            background-color: #000;
-        }
+  <script src="js/main.js"></script>
 
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EM6CNBH1F8"></script>
 
-        .video-container video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
+  <script>
+    const host = window.location.host.replace(/^www\./, "");
+    const PROMO_LS_KEY = `sb_wiz.promo-key.v.${host}`;
+    const REFERRER_LS_KEY = `sb_wiz.ref-key.v.${host}`;
+    const SOURCE_LS_KEY = `sb_wiz.source-key.v.${host}`;
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
-            z-index: 2;
-        }
+    const promoCode = new URLSearchParams(window.location.search).get(
+      "promo"
+    );
+    const referrer = new URLSearchParams(window.location.search).get("ref");
 
-        .signup-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-            background: rgba(20, 20, 30, 0.85);
-            padding: 2.5rem;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-        }
+    if (promoCode) {
+      localStorage.setItem(PROMO_LS_KEY, promoCode);
+    }
+    if (referrer) {
+      localStorage.setItem(REFERRER_LS_KEY, referrer);
+    }
 
-        .signup-container h1 {
-            color: #FFD700;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
+    var sourceURL = document.referrer;
+    if (sourceURL) {
+      localStorage.setItem(SOURCE_LS_KEY, sourceURL);
+    }
 
-        .signup-container p {
-            color: #fff;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
+    const urlParams = new URLSearchParams(window.location.search);
+    const utm_source = urlParams.get("utm_source");
+    if (utm_source) localStorage.setItem("utm_source", utm_source);
+    const utm_medium = urlParams.get("utm_medium");
+    if (utm_medium) localStorage.setItem("utm_medium", utm_medium);
+    const utm_campaign = urlParams.get("utm_campaign");
+    if (utm_campaign) localStorage.setItem("utm_campaign", utm_campaign);
+    const utm_content = urlParams.get("utm_content");
+    if (utm_content) localStorage.setItem("utm_content", utm_content);
+    const utm_term = urlParams.get("utm_term");
+    if (utm_term) localStorage.setItem("utm_term", utm_term);
+  </script>
 
-        .form-group {
-            margin-bottom: 1.8rem;
-            position: relative;
-        }
+  <style>
+    @keyframes color-change {
+      0% {
+        color: rgb(42, 209, 103);
+      }
+      50% {
+        color: #fff94e;
+      }
+      100% {
+        color: rgb(42, 209, 103);
+      }
+    }
+  </style>
 
-        .wallet-input-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
+  <script>
+    const BADGE_ID = "289b1eeb4fbdb9a6";
+  </script>
+  <script type="text/javascript" src="js/alchemy-badge.js"></script>
 
-        .wallet-icon {
-            position: absolute;
-            left: 16px;
-            color: #FFD700;
-            font-size: 1.2rem;
-        }
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-        .form-group input {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 215, 0, 0.5);
-            background-color: rgba(10, 10, 20, 0.7);
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+    gtag("config", "G-EM6CNBH1F8");
+  </script>
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #FFD700;
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .solana-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-
-        .solana-logo {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-        }
-
-        .signup-btn {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #000;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-            width: 90%;
-            max-width: 300px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .signup-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
-        }
-
-        .signup-btn:active {
-            transform: translateY(1px);
-        }
-
-        .signup-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .signup-btn:hover::before {
-            left: 100%;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 10;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: rgba(20, 20, 30, 0.95);
-            padding: 2.5rem;
-            border-radius: 16px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            position: relative;
-            animation: modalOpen 0.5s ease-out forwards;
-        }
-
-        @keyframes modalOpen {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .modal h2 {
-            color: #FFD700;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .modal p {
-            color: #fff;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.5;
-        }
-
-        .highlight {
-            color: #FFD700;
-            font-weight: 600;
-        }
-
-        .close-btn {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #000;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-            margin-top: 1rem;
-        }
-
-        .close-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
-        }
-
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 5;
-            height: 60px;
-        }
-
-        .wheat-token {
-            display: inline-block;
-            font-weight: bold;
-            background: -webkit-linear-gradient(#FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .benefits-list {
-            text-align: left;
-            max-width: 80%;
-            margin: 0 auto 1.5rem auto;
-        }
-
-        .benefits-list li {
-            color: #fff;
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 24px;
-            opacity: 0.9;
-        }
-
-        .benefits-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #FFD700;
-        }
-
-        @media (max-width: 768px) {
-            .signup-container {
-                padding: 1.8rem;
-            }
-
-            .signup-container h1 {
-                font-size: 1.6rem;
-            }
-
-            .benefits-list {
-                max-width: 100%;
-            }
-        }
-    </style>
+  <script src="https://track.playcradle.com/static/wallet_tracking_min.js"></script>
+  <link rel="stylesheet" href="css/tailwind.min.c99ebe9a.css">
+  <link rel="stylesheet" href="css/styles.38f2ea4b.css">
 </head>
-<body>
-    <!-- Logo -->
-    <img src="images/long_logo.png" alt="Solana Acres Logo" class="logo">
-
-    <!-- Video Background -->
-    <div class="video-container">
-        <video autoplay loop muted playsinline>
-            <source src="https://res.cloudinary.com/dk4bbapud/video/upload/v1740980992/yrlzob30hujvwx8gu1pa.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-
-    <!-- Overlay -->
-    <div class="overlay"></div>
-
-    <!-- Signup Container -->
-    <div class="signup-container">
-        <h1>Join Solana Acres Early Access</h1>
-        <p>Be among the first pioneers in our growing ecosystem with exclusive early token access.</p>
-        
-        <ul class="benefits-list">
-            <li>Access to $WHEAT token pre-launch</li>
-            <li>Exclusive starter farm plots</li>
-            <li>Special founding member benefits</li>
-        </ul>
-        
-        <div class="form-group">
-            <div class="solana-label">
-                <svg class="solana-logo" viewBox="0 0 397.7 311.7" xmlns="http://www.w3.org/2000/svg" width="20px" height="20px">
-                    <linearGradient id="solanaGradient" gradientUnits="userSpaceOnUse" x1="64.01" y1="302.81" x2="339.94" y2="26.87">
-                        <stop offset="0" stop-color="#00FFA3"/>
-                        <stop offset="1" stop-color="#DC1FFF"/>
-                    </linearGradient>
-                    <path fill="url(#solanaGradient)" d="M64.6 237.9c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zm0-139.6c2.4-2.4 5.7-3.8 9.2-3.8h317.4c5.8 0 8.7 7 4.6 11.1l-62.7 62.7c-2.4 2.4-5.7 3.8-9.2 3.8H6.5c-5.8 0-8.7-7-4.6-11.1l62.7-62.7zm317.5-61.6c-2.4-2.4-5.7-3.8-9.2-3.8H55.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z"/>
-                </svg>
-                Enter your Solana wallet address
+<body class="antialiased bg-body text-body font-body">
+  <div class="">
+    <section class="relative overflow-hidden flex flex-col h-full wave-bottom" style="
+        background-image: url('images/ocean.png');
+        background-repeat: repeat;
+        background-position: center top;
+        background-size: 15%;
+        image-rendering: pixelated;
+      ">
+      <div class="bg-tarnsparent">
+        <nav class="flex container mx-auto justify-between pt-6 px-4">
+          <a class="mr-2" href="#">
+            <img class="md:h-12 h-10 object-contain" src="images/long_logo.png" alt="" style="image-rendering: pixelated">
+          </a>
+          <div class="md:flex hidden">
+            <a target="_blank" class="
+                mr-2
+                inline-flex
+                items-center
+                justify-center
+                px-7
+                py-3
+                h-12
+                w-full
+                md:w-auto
+                text-lg
+                leading-7
+                text-white
+              " style="font-family: m5x7; font-size: 30px" href="https://solana-acres.gitbook.io/solana-acres">Docs</a>
+            <a target="_blank" class="
+                mt-1
+                justify-center
+                md:mb-0 md:mr-4
+                pixel-button
+                md:w-auto
+                whitespace-nowrap
+              " href="http://solanaacres.xyz/play.html">Play now</a>
+          </div>
+        </nav>
+      </div>
+      <div class="
+          flex-1
+          container
+          px-4
+          mx-auto
+          flex flex-wrap
+          items-center
+          pt-20
+          pb-40
+        ">
+        <div class="w-full md:w-1/2 mb-16 md:mb-0">
+          <div class="flex items-center flex-wrap mb-2">
+            <div class="grey-label mr-4 mb-2">Launching on Pump.Fun</div>
+            <div class="vibrant-label relative pl-4 mb-2">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAMCAYAAABbayygAAAAAXNSR0IArs4c6QAAANJJREFUGJVtkCETgkAUhJcbE/mcORLpDBho/AiLxSI2gzP8DBq/gWFokjAYrAxZsgax44xEx/pMx9yBr9173+zuLTAawSUJLmm8n0B186S6eU7g2RhO8/KviKWrFYFtHMPrF6++tQCA6VDmbsHiE1h8QuZuUQQ2hgiCS6pWPoVRQkREgktSE0YJVSufBJfElM1hvzFsnfnC2DEAuHzsCdS9H9Bvg6L6bfd+DJDegKVy7jyObrke7NK8hHM743jv8epby6hn53EjgoKMHhWsvxUEAD9ECWDr4ggfWQAAAABJRU5ErkJggg==" class="h-6 absolute -top-1 -left-2">
+              <span class="pl-3">CA:</span>
             </div>
-            
-            <div class="wallet-input-container">
-                <svg class="wallet-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; left: 16px;">
-                    <path d="M19 8V6C19 4.89543 18.1046 4 17 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20H17C18.1046 20 19 19.1046 19 18V16M19 8H21C21.5523 8 22 8.44772 22 9V15C22 15.5523 21.5523 16 21 16H19M19 8V16" stroke="#FFD700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="16" cy="12" r="1" fill="#FFD700"/>
-                </svg>
-                <input type="text" id="solana-address" placeholder="solana..." autocomplete="off" spellcheck="false">
+          </div>
+
+          <h1 class="mb-4 text-white lg:text-2xl sm:text-xl text-lg mt-4" style="text-shadow: 0px 2px #1f6dd5">
+            <p class="mb-2">Grow your farm</p>
+            <p class="mb-2" style="color: #ffde1f">Earn $Wheat</p>
+            <p>Explore and trade</p>
+          </h1>
+          <p class="mb-3 text-sm text-white">
+            Reap real rewards in Solana's richest
+            <span style="color: #ffde1f">Web3</span> farming economy!
+          </p>
+          <div class="flex flex-wrap">
+            <a target="_blank" class="
+                mt-1
+                justify-center
+                mb-2
+                md:mb-0 md:mr-4
+                pixel-button
+                w-full
+                sm:w-auto
+              " href="http://solanaacres.xyz/play.html">Play now</a>
+            <a target="_blank" class="
+                mt-1
+                justify-center
+                mb-2
+                md:mb-0
+                pixel-button
+                w-full
+                sm:w-auto
+              " href="https://pump.fun">Buy $WHEAT</a>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 px-4">
+          <div class="relative mx-auto md:mr-0 w-full">
+            <!-- <img
+                    class="absolute z-10 -right-7 -bottom-8 w-28 md:w-auto"
+                    src="public/flex-ui-assets/elements/dots3-blue.svg"
+                    alt=""
+                  /> -->
+
+            <div class="relative w-full">
+              <img class="relative rounded-5xl w-full mx-auto" style="image-rendering: pixelated" src="images/map_landing.8d6256ae.gif" alt="">
             </div>
+            <!-- <div class="aspect-w-16 aspect-h-9 z-10">
+                    <iframe
+                      src="https://www.youtube.com/embed/_VT4VKmHfno?rel=0&controls=0&modestbranding=1"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div> -->
+          </div>
         </div>
-        <button class="signup-btn" onclick="showThankYouModal()">Join Early Access</button>
-    </div>
+      </div>
 
-    <!-- Thank You Modal -->
-    <div class="modal" id="thank-you-modal">
-        <div class="modal-content">
-            <h2>Thanks for joining Solana Acres!</h2>
-            <p>We are excited to have you as one of our founding farmers.</p>
-            <p>We are now live on <span class="highlight">pump.fun</span></p>
-            <p>Enjoy early access to <span class="wheat-token">$WHEAT</span> and start your farming journey today!</p>
-            <button class="close-btn" onclick="closeModal()">Start Farming</button>
+      <div class="wave wave-bottom w-full text-white absolute" style="
+          bottom: 0px;
+          color: #fcfdfd;
+          background-image: url(images/clouds_top.png);
+          height: 230px;
+          background-repeat: repeat-x;
+          background-size: 1200px;
+        ">
+        <!-- <svg
+          viewbox="0 0 1440 116"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 64.5909H349.922C606.664 64.5909 859.771 -7.62939e-06 1080 -7.62939e-06C1300.23 -7.62939e-06 1440 64.5909 1440 64.5909V116H0V64.5909Z"
+            fill="currentColor"
+          ></path>
+        </svg> -->
+      </div>
+    </section>
+
+    <section class="lg:pt-12 bg-white overflow-hidden relative wave-bottom wave-top" style="">
+      <div class="container px-4 mx-auto">
+        <div class="md:max-w-4xl mx-auto mb-16 md:mb-24 text-center">
+          <div class="blue-label">Your Adventure begins</div>
+          <h1 class="mb-2 text-lg md:text-xl text-coolGray-900 mt-2">
+            Farm, Chop, Mine, Fish...
+          </h1>
+          <p class="text-sm md:text-sm text-[#3a4466] mb-4">
+            Early adopters welcome: Join now for priority token access.
+          </p>
+          <p class="text-3xl text-[#3a4466] font-medium mb-4" style="font-family: m5x7; line-height: 20px">
+            Supported, trusted and featured by the top projects in Web3!
+          </p>
+          <div class="container px-4 mx-auto mt-6 mb-12">
+            <div class="flex flex-wrap justify-center -mx-4">
+              <div class="w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-8 lg:mb-0">
+                <div class="
+                    flex
+                    items-center
+                    h-20
+                    md:h-20
+                    px-4
+                    md:px-4
+                    rounded-md
+                    bg-coolGray-50
+                    shadow-md
+                  ">
+                  <img class="mx-auto" src="images/Polygon_blockchain_logo.137c10e9.png" alt="">
+                </div>
+              </div>
+              <div class="w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-8 lg:mb-0">
+                <div class="
+                    flex
+                    items-center
+                    h-24
+                    md:h-20
+                    px-4
+                    md:px-4
+                    rounded-md
+                    bg-coolGray-50
+                    shadow-md
+                    h-full
+                  ">
+                  <img class="mx-auto" src="images/crypto-com-logo-box.723d8516.png" alt="">
+                </div>
+              </div>
+              <div class="w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-8 lg:mb-0">
+                <div class="
+                    flex
+                    items-center
+                    h-20
+                    md:h-20
+                    px-4
+                    md:px-8
+                    rounded-md
+                    bg-coolGray-50
+                    shadow-md
+                  ">
+                  <img class="mx-auto w-1/2 lg:w-full" src="images/OKX-Wallet-540x291.231bd26d.png" alt="">
+                </div>
+              </div>
+              <div class="w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-8 lg:mb-0">
+                <div class="
+                    flex
+                    items-center
+                    h-20
+                    md:h-20
+                    px-4
+                    md:px-4
+                    rounded-md
+                    bg-coolGray-50
+                    shadow-md
+                  ">
+                  <img class="mx-auto" src="images/CoinDesk_logo.svg.45a94e34.png" alt="">
+                </div>
+              </div>
+              <div class="w-1/2 md:w-1/3 lg:w-1/5 px-4 mb-8 lg:mb-0">
+                <div class="
+                    flex
+                    items-center
+                    h-20
+                    md:h-20
+                    px-4
+                    md:px-4
+                    rounded-md
+                    bg-coolGray-50
+                    shadow-md
+                  ">
+                  <img class="mx-auto" src="images/New_Bloomberg_Logo.svg.f32eee46.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <script>
-        function showThankYouModal() {
-            const address = document.getElementById('solana-address').value;
-            if (address.trim() === '') {
-                alert('Please enter your Solana wallet address');
-                return;
-            }
-            
-            // You would typically send this address to your backend here
-            console.log('Solana address submitted:', address);
-            
-            // Show thank you modal
-            document.getElementById('thank-you-modal').style.display = 'flex';
-        }
+      <div class="relative bg-white overflow-hidden shadow-lg -mt-14" style="
+          background-image: url('images/ocean.png');
+          background-repeat: repeat;
+          background-position: center top;
+          background-size: 15%;
+          image-rendering: pixelated;
+        ">
+        <img class="relative w-full z-20" style="image-rendering: pixelated" src="images/farm.b4df88b0.gif" alt="">
+        <img class="absolute w-full z-30 inset-0" style="image-rendering: pixelated" src="data:image/png;base64,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" alt="">
+      </div>
+    </section>
 
-        function closeModal() {
-            document.getElementById('thank-you-modal').style.display = 'none';
-            // Redirect to the home page (index.html)
-            window.location.href = 'index.html';
-        }
+    <section class="lg:pt-12 bg-white overflow-hidden relative wave-bottom wave-top">
+      <div class="container px-4 mx-auto">
+        <div class="md:max-w-4xl mx-auto mb-16 md:mb-24 text-center">
+          <span class="blue-label mb-4">Fishing</span>
+          <h1 class="mb-4 mt-2 text-lg md:text-xl text-coolGray-900">
+            Collect them all
+          </h1>
+          <p class="text-sm md:text-sm text-[#3a4466] mb-4">
+            Fish in the depths for Marine Marvels, dig for treasure and cross
+            breed flowers to find all the hidden secrets of Solana Acres!
+          </p>
+        </div>
+      </div>
 
-        // Ensure video works on mobile
-        document.addEventListener('DOMContentLoaded', function() {
-            const video = document.querySelector('video');
-            video.play().catch(function(error) {
-                console.log('Auto-play was prevented:', error);
-                // Create a play button if autoplay is blocked
-                const playButton = document.createElement('button');
-                playButton.innerHTML = 'Play Video';
-                playButton.style.position = 'absolute';
-                playButton.style.zIndex = '4';
-                playButton.style.top = '50%';
-                playButton.style.left = '50%';
-                playButton.style.transform = 'translate(-50%, -50%)';
-                playButton.style.padding = '10px 20px';
-                playButton.style.backgroundColor = '#FFD700';
-                playButton.style.border = 'none';
-                playButton.style.borderRadius = '5px';
-                playButton.style.cursor = 'pointer';
-                playButton.addEventListener('click', function() {
-                    video.play();
-                    this.remove();
-                });
-                document.body.appendChild(playButton);
-            });
-        });
-    </script>
-</body>
-</html>
+      <div class="relative bg-white overflow-hidden shadow-lg -mt-14" style="
+          background-image: url('images/ocean.png');
+          background-repeat: repeat;
+          background-position: center top;
+          background-size: 15%;
+          image-rendering: pixelated;
+        ">
+        <img class="relative w-full z-20" style="image-rendering: pixelated" src="images/fishing.ce5e875b.gif" alt="">
+        <img class="absolute w-full z-30 inset-0" style="image-rendering: pixelated" src="data:image/png;base64,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" alt="">
+      </div>
+    </section>
+
+    <section class="lg:pt-12 pb-8 bg-white overflow-hidden" style="">
+      <div class="mx-auto mb-2">
+        <div class="md:max-w-4xl mx-auto mb-16 md:mb-20 text-center px-2">
+          <span class="blue-label mb-4">$Wheat Yield</span>
+          <h1 class="text-lg md:text-xl text-coolGray-900 mb-4 mt-2">
+            Earn Through Gameplay
+          </h1>
+          <p class="text-sm md:text-sm text-[#3a4466] mb-4">
+            Gather resources and compete in farming challenges to yield valuable $WHEAT tokens. 
+            Maximize your earnings through strategic gameplay and trading with other players. 
+            How much $WHEAT will you harvest?
+          </p>
+          <div class="flex items-center justify-center flex-wrap">
+            <a target="_blank" class="pixel-button mb-2 mr-2" href="https://jup.ag/swap">Jupiter</a>
+            <a target="_blank" class="pixel-button mb-2" href="https://pump.fun/">Pump.Fun</a>
+          </div>
+        </div>
+        <section class="bg-white relative" style="z-index: 10">
+          <img class="relative w-full z-20" style="image-rendering: pixelated" src="images/collectibles.bbad8a57.gif" alt="">
+          <img class="absolute w-full z-30 inset-0" style="image-rendering: pixelated" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAADICAYAAACZBDirAAAAAXNSR0IArs4c6QAACCRJREFUeJzt3TGO3EYWBuCaWaVeA3sGwQsDG9mhM2/oxDfxWXwTJ9psnTm0IwOGhDmDF7JiqTcQaqanRTbJLpKvivV9gOFBq6tZ8/jjsZrN5tydTqdTAujQffQEAKJogEC3NECgWxog0C0NEOiWBgh0SwMEuqUBAt168Z//vUsvP//s8YEvJlrimw9PPz+8fRo7Ne5och3Oa5BSO/Vba/4ppdDx8id/JePvXv351+nyRebIGx8ae9Qwnhcvpes1mBJRv63mHz1e/tqoX435e2yAS15k6cZbDeTlDrt0607Yq357zT96vPx9VFv9WsjfswY49UJjG57a+BEDeEst9q7fnvOPHi9/T2qpXwv5u//hm++/Hnri0H+Xhsb2pvX6lc4/evyCX/WQWq9fdH7uxyaxdOLXuvPUUrhGS45eNdZvz/lHj09J/pa+vvx9HHN/+UDJxucuUVt2/jveuhMi67f2/KPHy9+nP0+Rv6fn3r388tuvLp/w4y8//Tp3w2PPH3of3sq5mKGj15K3ENH123v+0ePl77no+rWUv8EGeIujhLB0591qrfpFzT+a/JXpNX+rxWHuL1Tz+Zi5c9ti561Rv8j5R5O/Mr3mb7UVYHZ5JGnh8oStT9gucUv9app/NPkr01v+7lJK6dYm+PDHz7+Njc2FPEoAx3bctRpMWat+kfNPqSw/pePlT/5Kxt+fv9AtGx+Tf+GWP5mb2nmPz6u0fnvNP3r8EPmbeG35+y2ls3OAS15k6cbHiljD+ZixOczZ8bfuhDXrFz3/6PHy9+nPa487cv7uhp4wtqQc28i1Jej5OYUaP5Wb+tTq2tFraT22qN/gdnaef/R4+XtO/uaPH2yAt5g6l/DsuQtuX7O1odvrnLt27mLNedxav2dzCpx/NPkr02v+VmuAKS0r4rNxwfejG7P3zru1fmNqD9/a5K9Mj/lbtQGmtE4I57j1Vjpj4y9F7by1QthC+LYgf2V6y9/qDTBb8hW7xzHB96PLBu8wsfOOu6V+WQ3zjyZ/ZXrJ32YNMKX1j8Zb34+utqPW0vrVNv9o8lemh/y9iNjoZaEuCzo3aPl1Sse3ptV510L+yrQ67yGbrgBTmn+Vduk5hrXOUVyKPnqVflUxev7R5K/M0fNXyZeB4u9HR9/kr0+brwBTWn4Uib4fXVbL0av0u5K9k78yR87fLg0wpfKl9N5q23lL61fb/KPJX5mj5m+3BphSOyGsdefNrV+t848mf2WOmL9dG2BWaxBb2XGl35XsnfyVOVL+Qhrgpej70dE3+etXFQ0wpfJzDEc9R8E+5K9P1TTAlMrPMRzxHAX7kb/+VNUAs+j70dE3+QMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAtd9ETgEuv359OQ4//82938sqqBIpq5Mb3xf3wv7/58PH/GiFwKK/fn2YbWyECNGdJ89MEgcO4pflpgkDzSpqfJsgaRk43AwCbWGP1ZxUINGfN5qcJUsL1VOxm6jq/Uq4TZClBYRev359OWzW+S28+aILMIyRsbs/ml2mCzCEgbCqi+WWaIFOEg81ENr9ME+Qa1wEC3dIA2URNl6XUNBfqogEC3dIA2cTD23fRU3hU01yoiwbIpvLFyb1tmzZogGwmr7wiGlHeptUf12iA7GLPJmjlx1yuj2Izr/7865RSSi8//+zxsa2vCzxvfnn1990//i7nDLICZHPnb0O3XJ0NNT+4xpGxQqV/FrKGPyv58stvv0oppR9/+enXx8fOVoJZ6YpwqKGeN78fvvn+65RSevjj59/KttSPI+RvrhfRE+DJ1O2i8r+PBal0/NYe3r4bbIJrb4PbHD1/Q7wFrkT+3uy1FVH+96EjbOn4reQVWPbw9t0mTWrodS+3zbij5m+KFWAFlt40IIcoH0lLx0fIzeohLfuQxHm+9fWYvyx8Ar0ruWNKbgYl47cKYT4HmJ2fCxx8/sK3xlPN75OVp3OAg46av7m8BQ5Ueruoqbccc8bv9XZk6u3oktXc0ubHsJ7yN8YKMNDR75d3uQrMbl0N3tr4rP6GHT1/czTZAFv6mH1MDeHLtgrhWAO8NNUQx8xd6a3dAOVvXZFNsJkdltL0x+yt/FWwmsKXtdYEI5qf/G0nqglWVoZxrX7Mfu71+49/v7a28KX0VLeo2i05bxdxjk/+thWVv6qPVOeW7Ljo8wpDag3ekLXrN3cVmI2tBpc2vrVXf/K3jz3rV9VOGnPLzqsphC2FL1uzfksb4FrWaoDyt7+96lfFDrqm9Dql6BC2GL6s5SYY2fwy+SuzR/2qboBr7LzIELYcvqzFJlhD88vkr8zW9fNVOHaTG9NWjdD1fixV7QpwzaNXxFH4CEffbOv63doQt2x48lePLet39bY2l/a6H9gWO29JEWucf7St63feBF/9/t/BT4G/+9e/Hz8Fvtb8atx/8ldmq/o9e6D0Qs+tx5dqff7RousXPb5U6/OPtkX9Hn8ovc5pz/GlWp9/tOj6RY8v1fr8o61Zv5vu53X5IhHjS7U+/2jR9YseX6r1+Udbq3530fcDKxlfqvX5R4uuX/T4Uq3PP9oa9bs7ner83iLA1jo9dgBogEDHNECgWxog0C0NEOiWBgh0SwMEuqUBAt3SAIFuaYBAtzRAoFv/B0F3rv4pzVl8AAAAAElFTkSuQmCC" alt="">
+        </section>
+      </div>
+      <div class="container px-4 mx-auto text-center md:max-w-4xl mx-auto py-8">
+        <span class="blue-label mb-2">Legacy</span>
+        <h1 class="text-xl md:text-lg mb-2 mt-2">Become a town hero</h1>
+        <p class="text-sm md:text-sm text-[#3a4466] mb-4">
+          Complete deliveries at the Acres ranch and complete quests.
+        </p>
+        <a target="_blank" class="pixel-button" href="http://solanaacres.xyz/play.html">Play now</a>
+      </div>
+    </section>
+
+    <section class="bg-white relative" style="z-index: 10">
+      <img class="relative w-full z-20" style="image-rendering: pixelated" src="images/plaza.80e127bb.gif" alt="">
+      <img class="absolute w-full z-30 inset-0" style="image-rendering: pixelated" src="data:image/png;base64,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" alt="">
+    </section>
+
+    <section class="lg:pt-12 bg-white overflow-hidden relative wave-bottom wave-top" style="">
+      <div class="container px-4 mx-auto">
+        <div class="md:max-w-4xl mx-auto mb-16 md:mb-24 text-center">
+          <span class="blue-label mb-4">Upgrade your island</span>
+          <h1 class="mb-4 text-lg md:text-xl text-coolGray-900 mt-2">
+            New areas to explore
+          </h1>
+          <p class="text-sm md:text-sm text-[#3a4466] mb-4">
+            Upgrade your island and explore the regions of Petal Paradise,
+            Volanic Terrain and the Swamp Lands.
+          </p>
+          <a target="_blank" class="pixel-button" href="http://solanaacres.xyz/play.html">Play now</a>
+        </div>
+      </div>
+
+      <div class="relative bg-white overflow-hidden shadow-lg -mt-8" style="
+          background-image: url('images/ocean.png');
+          background-repeat: repeat;
+          background-position: center top;
+          background-size: 15%;
+          image-rendering: pixelated;
+        ">
+        <img class="relative w-full z-20" style="image-rendering: pixelated" src="images/explore.62f05759.png" alt="">
+        <img class="absolute w-full z-30 inset-0" style="image-rendering: pixelated" src="data:image/png;base64,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" alt="">
+      </div>
+    </section>
+
+    <section class="py-20 xl:pt-24 bg-white" style="">
+      <div class="container px-4 mx-auto">
+        <div class="mb-8 text-center">
+          <span class="blue-label mb-4">Community</span>
+          <h3 class="mb-4 text-base md:text-lg text-coolGray-900 mt-4" id="community">
+            Where to find us?
+          </h3>
+          <p class="text-xs md:text-sm text-[#3a4466]">
+            Come join us on the following platforms.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center -mx-4">
+          <div class="w-1/3 lg:w-1/3 px-4 mb-8 lg:mb-0">
+            <div class="
+                flex
+                items-center
+                h-32
+                md:h-36
+                px-4
+                md:px-8
+                rounded-md
+                bg-coolGray-50
+                shadow-md
+              ">
+              <a target="_blank" class="inline-block hover:opacity-80 w-full" href="https://x.com/SolanaAcres">
+                <img class="w-1/3 mx-auto" src="images/twitter.f1789447.svg" alt=""></a>
+            </div>
+          </div>
+          <div class="w-1/3 lg:w-1/3 px-4 mb-8 lg:mb-0">
+            <div class="
+                flex
+                items-center
+                h-32
+                md:h-36
+                px-4
+                md:px-8
+                rounded-md
+                bg-coolGray-50
+                shadow-md
+              ">
+              <a target="_blank" class="inline-block hover:opacity-80 w-full" href="https://github.com/sunflower-land/sunflower-land">
+                <img class="w-1/3 mx-auto" src="images/github.1a2acfa6.svg" alt=""></a>
+            </div>
+          </div>
+          <div class="w-1/3 lg:w-1/3 px-4 mb-8 lg:mb-0">
+            <div class="
+                flex
+                items-center
+                h-32
+                md:h-36
+                px-4
+                md:px-8
+                rounded-md
+                bg-coolGray-50
+                shadow-md
+              ">
+              <a target="_blank" class="inline-block opacity-40 hover:opacity-80 w-full" href="https://gmcapital.xyz/">
+                <img class="w-1/3 mx-auto" src="images/OpenSea-Logo.abec0ac4.png" style="filter: grayscale(1)" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap justify-center mt-8">
+          <div class="w-full md:w-auto py-1 md:py-0 md:mr-4 mb-2">
+            <a target="_blank" class="pixel-button" href="http://solanaacres.xyz/play.html">Play Now</a>
+          </div>
+          <div class="w-full md:w-auto py-1 md:py-0 mb-2">
+            <a target="_blank" class="pixel-button" href="https://pump.fun">Buy $WHEAT</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-coolGray-50 py-4">
+      <div class="container px-4 mx-auto">
+        <div class="p-6 bg-green-100 border border-green-200 rounded-md">
+          <div class="flex flex-wrap justify-between items-center -m-2">
+            <div class="flex-1 p-2">
+              <div class="flex flex-wrap -m-1">
+                <div class="w-auto p-1">
+                  <svg class="relative top-0.5" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.4732 4.80667C12.4112 4.74418 12.3375 4.69458 12.2563 4.66074C12.175 4.62689 12.0879 4.60947 11.9999 4.60947C11.9119 4.60947 11.8247 4.62689 11.7435 4.66074C11.6623 4.69458 11.5885 4.74418 11.5266 4.80667L6.55989 9.78L4.47322 7.68667C4.40887 7.62451 4.33291 7.57563 4.24967 7.54283C4.16644 7.51003 4.07755 7.49394 3.9881 7.49549C3.89865 7.49703 3.81037 7.51619 3.72832 7.55185C3.64627 7.58751 3.57204 7.63898 3.50989 7.70333C3.44773 7.76768 3.39885 7.84364 3.36605 7.92688C3.33324 8.01011 3.31716 8.099 3.31871 8.18845C3.32025 8.2779 3.3394 8.36618 3.37507 8.44823C3.41073 8.53028 3.4622 8.60451 3.52655 8.66667L6.08655 11.2267C6.14853 11.2892 6.22226 11.3387 6.3035 11.3726C6.38474 11.4064 6.47188 11.4239 6.55989 11.4239C6.64789 11.4239 6.73503 11.4064 6.81627 11.3726C6.89751 11.3387 6.97124 11.2892 7.03322 11.2267L12.4732 5.78667C12.5409 5.72424 12.5949 5.64847 12.6318 5.56414C12.6688 5.4798 12.6878 5.38873 12.6878 5.29667C12.6878 5.2046 12.6688 5.11353 12.6318 5.02919C12.5949 4.94486 12.5409 4.86909 12.4732 4.80667Z" fill="#2AD168"></path>
+                  </svg>
+                </div>
+                <div class="flex-1 p-1">
+                  <h3 class="text-sm text-green-900" style="font-family: m5x7; font-size: 20px">
+                    The information provided on this website does not
+                    constitute investment advice, financial advice, trading
+                    advice, or any other sort of advice and you should not
+                    treat any of the website’s content as such. Thought Solana Acres Ltd 
+                    does not recommend that any cryptocurrency should
+                    be bought, sold, or held by you. The game uses a utility
+                    token that is not intended for purchase. The game can be
+                    played entirely without the need to purchase any token.
+                    Always do your own research
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white overflow-hidden" style="">
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-wrap lg:items-center pt-24 pb-12 -mx-4">
+          <div class="w-full md:w-1/4 lg:w-auto px-4 flex items-center">
+            <a target="_blank" class="block mb-0 max-w-max mr-2" href="#">
+              <img class="h-8" src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/67c5e5f301230a7371ca6337_90692a50d92e98e6044ee6becf812d02%20(3).png" alt=""></a>
+            <a href="#" class="mx-auto">
+              <img onclick="logBadgeClick()" id="badge-button" style="width: 240px; height: 53px" src="images/badgeLight.png" alt="Alchemy Supercharged">
+            </a>
+          </div>
+          <div class="w-full md:w-3/4 lg:flex-1 px-4">
+            <div class="flex flex-wrap justify-end -mx-3 lg:-mx-6">
+              <div class="w-full md:w-auto p-3 md:py-0 md:px-6">
+                <a target="_blank" class="
+                    inline-block
+                    text-sm text-[#3a4466]
+                    hover:text-coolGray-600
+                  " href="https://solana-acres.gitbook.io/solana-acres">Docs</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-b border-coolGray-100"></div>
+      <div class="container px-4 mx-auto">
+        <div class="flex flex-wrap items-center py-12 md:pb-32">
+          <div class="w-full md:w-1/2 mb-6 md:mb-0">
+            <p class="text-coolGray-400 font-medium text-base" style="font-family: m5x7">
+              © 2025 Solana Acres. All rights reserved.
+            </p>
+          </div>
+          <div class="w-full md:w-1/2">
+            <div class="flex flex-wrap md:justify-end -mx-5">
+              <div class="px-5">
+                <a target="_blank" class="
+                    inline-block
+                    text-coolGray-300
+                    hover:text-coolGray-400
+                  " href="https://x.com/SolanaAcres">
+                  <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.8181 2.14597C18.1356 2.44842 17.4032 2.65355 16.6336 2.74512C17.4194 2.27461 18.0208 1.5283 18.3059 0.641757C17.5689 1.07748 16.7553 1.39388 15.8885 1.56539C15.1943 0.824879 14.2069 0.363636 13.1118 0.363636C11.0108 0.363636 9.30722 2.06718 9.30722 4.16706C9.30722 4.46488 9.34083 4.75576 9.40574 5.03391C6.24434 4.87512 3.44104 3.36048 1.56483 1.05894C1.23686 1.61985 1.05028 2.27342 1.05028 2.97109C1.05028 4.29106 1.72243 5.45573 2.74225 6.13712C2.11877 6.11627 1.53237 5.94476 1.01901 5.65967V5.70718C1.01901 7.54979 2.33086 9.08761 4.07031 9.43761C3.75161 9.52336 3.41555 9.57088 3.06789 9.57088C2.82222 9.57088 2.58464 9.54655 2.35171 9.50018C2.8361 11.0125 4.24067 12.1123 5.90483 12.1424C4.6034 13.1622 2.96243 13.7683 1.1801 13.7683C0.873008 13.7683 0.570523 13.7498 0.272705 13.7162C1.95655 14.7974 3.95561 15.4278 6.10416 15.4278C13.1026 15.4278 16.928 9.63115 16.928 4.60397L16.9153 4.11145C17.6627 3.57833 18.3094 2.90851 18.8181 2.14597Z" fill="currentColor"></path></svg></a>
+              </div>
+
+              <div class="px-5">
+                <a target="_blank" class="
+                    inline-block
+                    text-coolGray-300
+                    hover:text-coolGray-400
+                  " href="https://github.com/sunflower-land/sunflower-land">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 0C4.0275 0 0 4.13211 0 9.22838C0 13.3065 2.5785 16.7648 6.15375 17.9841C6.60375 18.0709 6.76875 17.7853 6.76875 17.5403C6.76875 17.3212 6.76125 16.7405 6.7575 15.9712C4.254 16.5277 3.726 14.7332 3.726 14.7332C3.3165 13.6681 2.72475 13.3832 2.72475 13.3832C1.9095 12.8111 2.78775 12.8229 2.78775 12.8229C3.6915 12.887 4.16625 13.7737 4.16625 13.7737C4.96875 15.1847 6.273 14.777 6.7875 14.5414C6.8685 13.9443 7.10025 13.5381 7.3575 13.3073C5.35875 13.0764 3.258 12.2829 3.258 8.74709C3.258 7.73988 3.60675 6.91659 4.18425 6.27095C4.083 6.03774 3.77925 5.0994 4.263 3.82846C4.263 3.82846 5.01675 3.58116 6.738 4.77462C7.458 4.56958 8.223 4.46785 8.988 4.46315C9.753 4.46785 10.518 4.56958 11.238 4.77462C12.948 3.58116 13.7017 3.82846 13.7017 3.82846C14.1855 5.0994 13.8818 6.03774 13.7917 6.27095C14.3655 6.91659 14.7142 7.73988 14.7142 8.74709C14.7142 12.2923 12.6105 13.0725 10.608 13.2995C10.923 13.5765 11.2155 14.1423 11.2155 15.0071C11.2155 16.242 11.2043 17.2344 11.2043 17.5341C11.2043 17.7759 11.3617 18.0647 11.823 17.9723C15.4237 16.7609 18 13.3002 18 9.22838C18 4.13211 13.9703 0 9 0Z" fill="currentColor"></path></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+</body></html>
