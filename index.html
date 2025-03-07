@@ -1181,18 +1181,15 @@
       
       // Update status message
       function updateStatus(message, type) {
-          statusDisplay.textContent = message;
-          statusDisplay.className = 'status';
-          statusDisplay.classList.add(type);
-          statusDisplay.style.display = 'block';
-          
-          updateProcessStatus(message);
-      }
-      
-      // Update process status text
-      function updateProcessStatus(message) {
-          processStatus.textContent = message;
-      }
+  console.log('Status:', type, message);
+  // No DOM updates, just log to console
+}
+
+// Update process status text - modified to not require DOM elements
+function updateProcessStatus(message) {
+  console.log('Process status:', message);
+  // No DOM updates, just log to console
+}
     </script>
   
 
